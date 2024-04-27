@@ -3,9 +3,19 @@ import { Ionicons } from "@expo/vector-icons";
 import { Stack } from "expo-router";
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useHeaderHeight } from '@react-navigation/elements'
+import CategoryButtons from "@/components/CategoryButtons";
+import { useState } from "react";
 const Page = () => {
 
   const headerHeight = useHeaderHeight()
+
+  const [category, setCategory] = useState("All");
+
+  const onCatChanged = (category: string) => {
+    console.log("Categpry: ", category);
+    setCategory(category);
+  };
+
 
   return (
     <>
@@ -55,6 +65,7 @@ const Page = () => {
             <Ionicons name="options" size={28} color={Colors.white} />
           </TouchableOpacity>
         </View>
+        <CategoryButtons onCagtegoryChanged={onCatChanged} />
       </View>
     </>
 

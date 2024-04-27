@@ -1,6 +1,6 @@
 export default {
   primaryColor: "#ff7f36",
-  bgColor: "#f4f4f4",
+  bgColor: "#e6dfdf",
   black: "#27283a",
   white: "#fff",
 };
