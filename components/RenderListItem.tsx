@@ -1,40 +1,41 @@
 import Colors from "@/constants/Colors"
 import { ListingType } from "@/types/listingTypes"
 import { FontAwesome5, Ionicons } from "@expo/vector-icons"
+import { Link } from 'expo-router';
 import { Image, ListRenderItem, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 
 export const RenderListItems: ListRenderItem<ListingType> = ({ item }) => {
   return (
-    <TouchableOpacity>
-      <View style={styles.item}>
-        <Image source={{ uri: item.image }} style={styles.image} />
-        <View style={styles.bookmark}>
-          <Ionicons name='bookmark-outline' color={Colors.white} size={20} />
-        </View>
-
-        <Text
-          numberOfLines={1}
-          ellipsizeMode="tail"
-          style={styles.itemTxt}
-        >{item.name}
-        </Text>
-
-        <View
-          style={{ flexDirection: "row", justifyContent: "space-between" }}
-        >
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <FontAwesome5
-              name="map-marker-alt"
-              size={18}
-              color={Colors.primaryColor}
+    <Link href={`/listing/${item.id}`} asChild>
+      <TouchableOpacity>
+        <View style={styles.item}>
+          <Image source={{ uri: item.image }} style={styles.image} />
+          <View style={styles.bookmark}>
+            <Ionicons
+              name="bookmark-outline"
+              size={20}
+              color={Colors.white}
             />
-            <Text style={styles.itemLocationTxt}>{item.location}</Text>
           </View>
-          <Text style={styles.itemPriceTxt}>${item.price}</Text>
+          <Text style={styles.itemTxt} numberOfLines={1} ellipsizeMode="tail">
+            {item.name}
+          </Text>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <FontAwesome5
+                name="map-marker-alt"
+                size={18}
+                color={Colors.primaryColor}
+              />
+              <Text style={styles.itemLocationTxt}>{item.location}</Text>
+            </View>
+            <Text style={styles.itemPriceTxt}>${item.price}</Text>
+          </View>
         </View>
-      </View>
-
-    </TouchableOpacity >
+      </TouchableOpacity>
+    </Link>
   )
 }
 
