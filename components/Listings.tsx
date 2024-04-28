@@ -9,20 +9,28 @@ type Props = {
 };
 export function Listings({ listings, category }: Props) {
   const [loading, setLoading] = useState(false)
+  const [currentListings, setCurrentListings] = useState<any[]>([]);
 
   useEffect(() => {
     console.log('Update Listing');
     setLoading(true);
 
+    if (category === 'All') {
+      setCurrentListings(listings);
+    } else {
+      const filteredListings = listings.filter((item) => item.category === category);
+      setCurrentListings(filteredListings);
+    }
+
     setTimeout(() => {
-      setLoading(false)
+      setLoading(false);
     }, 200);
   }, [category]);
 
   return (
     <View>
       <FlatList
-        data={loading ? [] : listings}
+        data={loading ? [] : currentListings}
         keyExtractor={(item) => item.id.toString()}
         renderItem={RenderListItems}
         horizontal
